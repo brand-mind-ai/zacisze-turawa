@@ -1,0 +1,150 @@
+media:
+  input: public/media
+  output: /media
+
+content:
+  - name: pl_pages
+    label: Polish pages
+    type: collection
+    path: src/content/pl/pages
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: canonicalPath
+        label: Canonical path
+        type: string
+        required: true
+      - name: sourceUrl
+        label: Source URL
+        type: string
+      - name: heroImage
+        label: Hero image
+        type: image
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: pl_rooms
+    label: Polish rooms
+    type: collection
+    path: src/content/pl/rooms
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: canonicalPath
+        label: Canonical path
+        type: string
+        required: true
+      - name: sourceUrl
+        label: Source URL
+        type: string
+      - name: heroImage
+        label: Hero image
+        type: image
+      - name: gallery
+        label: Gallery
+        type: image
+        list: true
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: pl_offers
+    label: Polish offers and packages
+    type: collection
+    path: src/content/pl/offers
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: canonicalPath
+        label: Canonical path
+        type: string
+        required: true
+      - name: sourceUrl
+        label: Source URL
+        type: string
+      - name: heroImage
+        label: Hero image
+        type: image
+      - name: gallery
+        label: Gallery
+        type: image
+        list: true
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: en_pages
+    label: English pages
+    type: collection
+    path: src/content/en/pages
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: canonicalPath
+        label: Canonical path
+        type: string
+        required: true
+      - name: sourceUrl
+        label: Source URL
+        type: string
+      - name: heroImage
+        label: Hero image
+        type: image
+      - name: gallery
+        label: Gallery
+        type: image
+        list: true
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: de_pages
+    label: German pages
+    type: collection
+    path: src/content/de/pages
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: canonicalPath
+        label: Canonical path
+        type: string
+        required: true
+      - name: sourceUrl
+        label: Source URL
+        type: string
+      - name: heroImage
+        label: Hero image
+        type: image
+      - name: gallery
+        label: Gallery
+        type: image
+        list: true
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: site_data
+    label: Site data
+    type: file
+    path: src/data/domains.json
+    fields:
+      - name: temporaryLaunchDomain
+        label: Temporary launch domain
+        type: string
+      - name: finalCanonicalDomain
+        label: Final canonical domain
+        type: string
+      - name: seoPolicy
+        label: SEO policy
+        type: text
