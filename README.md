@@ -4,7 +4,7 @@ Lean Astro rebuild for `zaciszeturawa.pl`.
 
 ## Current Status
 
-This repository is in foundation setup. Production page content has not been extracted yet.
+This repository is in foundation setup. Current live-site content has been extracted from `https://www.zaciszeturawa.pl/` into Pages CMS-backed Markdown files, with current image references saved under `public/media/current-site`.
 
 Source rules:
 
@@ -30,6 +30,17 @@ Reduced-motion preference disables Lenis and all GSAP triggers.
 ```bash
 npm install
 npm run dev
+npm run crawl:current
 npm run check
 npm run build
 ```
+
+## Current Crawl Outputs
+
+- `Current Site Inventory.md`
+- `src/data/current-site-crawl.json`
+- `src/data/image-map.json`
+- `src/content/pl`
+- `src/content/en`
+- `src/content/de`
+- `public/media/current-site`

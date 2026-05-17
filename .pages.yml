@@ -80,6 +80,60 @@ content:
         label: Body
         type: rich-text
 
+  - name: en_pages
+    label: English pages
+    type: collection
+    path: src/content/en/pages
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: canonicalPath
+        label: Canonical path
+        type: string
+        required: true
+      - name: sourceUrl
+        label: Source URL
+        type: string
+      - name: heroImage
+        label: Hero image
+        type: image
+      - name: gallery
+        label: Gallery
+        type: image
+        list: true
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: de_pages
+    label: German pages
+    type: collection
+    path: src/content/de/pages
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: canonicalPath
+        label: Canonical path
+        type: string
+        required: true
+      - name: sourceUrl
+        label: Source URL
+        type: string
+      - name: heroImage
+        label: Hero image
+        type: image
+      - name: gallery
+        label: Gallery
+        type: image
+        list: true
+      - name: body
+        label: Body
+        type: rich-text
+
   - name: site_data
     label: Site data
     type: file
