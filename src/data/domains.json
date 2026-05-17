@@ -1,0 +1,5 @@
+{
+  "temporaryLaunchDomain": "https://zaciszeturawa.com/",
+  "finalCanonicalDomain": "https://www.zaciszeturawa.pl/",
+  "seoPolicy": "Build and test on the temporary .com domain, but optimize long-term SEO for the final .pl domain. Use relative internal links wherever possible and avoid making .com the permanent canonical by accident."
+}
