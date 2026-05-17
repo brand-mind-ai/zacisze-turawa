@@ -1,0 +1,29 @@
+---
+import bookingConfig from "@data/booking.json";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<form class:list={["booking-bar", { compact }]} action={bookingConfig.baseUrl} method="get">
+  <label class="booking-date">
+    <input name="arrivalDate" type="date" />
+    <span class="booking-date-text">
+      <span class="booking-date-label">Przyjazd</span>
+      <span class="booking-date-placeholder">Data</span>
+    </span>
+  </label>
+  <span class="booking-separator" aria-hidden="true"></span>
+  <label class="booking-date">
+    <input name="departureDate" type="date" />
+    <span class="booking-date-text">
+      <span class="booking-date-label">Wyjazd</span>
+      <span class="booking-date-placeholder">Data</span>
+    </span>
+  </label>
+  <input name="personsCount" type="hidden" value="2" />
+  <button type="submit">Rezerwuj</button>
+</form>

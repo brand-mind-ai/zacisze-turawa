@@ -1,0 +1,22 @@
+---
+import { primaryNavigation, socialLinks } from "@lib/site-navigation";
+---
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Hotel Zacisze">
+    <img src="/media/current-site/004-logo.svg" alt="Hotel Zacisze" width="210" height="38" />
+  </a>
+
+  <nav class="primary-nav" aria-label="Główna nawigacja">
+    {primaryNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
+
+  <div class="header-actions" aria-label="Linki kontaktowe">
+    {socialLinks.map((item) => (
+      <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
+        {item.label}
+      </a>
+    ))}
+    <a class="booking-link" href="/ceny_i_rezerwacja">Rezerwuj</a>
+  </div>
+</header>

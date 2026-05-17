@@ -1,0 +1,37 @@
+---
+import ContentPage from "@components/ContentPage.astro";
+import SiteFooter from "@components/SiteFooter.astro";
+import SiteHeader from "@components/SiteHeader.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const collections = await Promise.all([
+    getCollection("plPages"),
+    getCollection("plRooms"),
+    getCollection("plOffers"),
+  ]);
+  const entries = collections
+    .flat()
+    .filter((entry) => entry.data.canonicalPath !== "/")
+    .filter((entry) => entry.data.canonicalPath !== "/strefa_spa");
+
+  return entries.map((entry) => ({
+    params: { slug: entry.data.canonicalPath.replace(/^\//, "") },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const [rooms, offers] = await Promise.all([
+  getCollection("plRooms", ({ data }) => data.canonicalPath !== "/pokoje"),
+  getCollection("plOffers", ({ data }) => data.canonicalPath !== "/pakiety_pobytowe"),
+]);
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.seoTitle ?? entry.data.title} description={entry.data.description}>
+  <SiteHeader />
+  <ContentPage entry={entry} Content={Content} rooms={rooms} offers={offers} />
+  <SiteFooter />
+</BaseLayout>

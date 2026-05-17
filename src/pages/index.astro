@@ -1,50 +1,24 @@
 ---
+import ContentPage from "@components/ContentPage.astro";
+import SiteFooter from "@components/SiteFooter.astro";
+import SiteHeader from "@components/SiteHeader.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+const pages = await getCollection("plPages");
+const rooms = await getCollection("plRooms", ({ data }) => data.canonicalPath !== "/pokoje");
+const offers = await getCollection("plOffers", ({ data }) => data.canonicalPath !== "/pakiety_pobytowe");
+const entry = pages.find((page) => page.data.canonicalPath === "/");
+
+if (!entry) {
+  throw new Error("Missing Polish homepage content");
+}
+
+const { Content } = await render(entry);
 ---
 
-<BaseLayout title="Zacisze Turawa Rebuild Scaffold">
-  <main>
-    <h1>Zacisze Turawa Rebuild Scaffold</h1>
-    <p>
-      Production content is intentionally empty until the verified crawl and
-      current-content preservation stage is complete.
-    </p>
-  </main>
+<BaseLayout title={entry.data.seoTitle ?? entry.data.title} description={entry.data.description}>
+  <SiteHeader />
+  <ContentPage entry={entry} Content={Content} rooms={rooms} offers={offers} />
+  <SiteFooter />
 </BaseLayout>
-
-<style>
-  :global(body) {
-    margin: 0;
-    background: #f6f1ea;
-    color: #131210;
-    font-family:
-      "Host Grotesk",
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      sans-serif;
-  }
-
-  main {
-    min-height: 100svh;
-    display: grid;
-    place-content: center;
-    gap: 1rem;
-    padding: 2rem;
-    text-align: center;
-  }
-
-  h1 {
-    margin: 0;
-    font-family: "Libre Baskerville", Georgia, serif;
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 400;
-  }
-
-  p {
-    max-width: 42rem;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-</style>

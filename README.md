@@ -35,6 +35,18 @@ npm run check
 npm run build
 ```
 
+## Cloudflare Pages Preview
+
+Cloudflare Pages settings for this Astro static build:
+
+- Repository: `brand-mind-ai/zacisze-turawa`
+- Preview branch: `codex/live-preview-scaffold`
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Environment variable for temporary preview: `PUBLIC_SITE_URL=https://zaciszeturawa.com`
+
+Reference: https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/
+
 ## Current Crawl Outputs
 
 - `Current Site Inventory.md`

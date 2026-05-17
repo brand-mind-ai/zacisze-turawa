@@ -1,0 +1,38 @@
+---
+import { contentImages } from "@lib/content-images";
+
+interface RelatedItem {
+  data: {
+    canonicalPath: string;
+    title: string;
+    heroImage?: string;
+    gallery?: string[];
+  };
+}
+
+interface Props {
+  title: string;
+  items: RelatedItem[];
+}
+
+const { title, items } = Astro.props;
+---
+
+{items.length > 0 && (
+  <section class="related-section">
+    <div class="section-heading">
+      <h2>{title}</h2>
+    </div>
+    <div class="related-scroller">
+      {items.map((item) => {
+        const image = contentImages([item.data.heroImage, ...(item.data.gallery ?? [])])[0];
+        return (
+          <a class="related-item" href={item.data.canonicalPath}>
+            {image && <img src={image} alt={item.data.title} loading="lazy" />}
+            <span>{item.data.title}</span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+)}

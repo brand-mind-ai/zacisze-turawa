@@ -1,0 +1,22 @@
+---
+import { primaryNavigation, socialLinks } from "@lib/site-navigation";
+---
+
+<footer class="site-footer">
+  <div>
+    <a class="footer-brand" href="/">Hotel Zacisze</a>
+    <p>ul. Biwakowa 2, 46-045 Turawa k. Opola</p>
+  </div>
+
+  <nav aria-label="Nawigacja w stopce">
+    {primaryNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
+
+  <div class="footer-contact">
+    {socialLinks.map((item) => (
+      <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
+        {item.label}
+      </a>
+    ))}
+  </div>
+</footer>

@@ -1,0 +1,63 @@
+---
+import BookingBar from "@components/BookingBar.astro";
+import MediaGallery from "@components/MediaGallery.astro";
+import RelatedLinks from "@components/RelatedLinks.astro";
+import bookingConfig from "@data/booking.json";
+import { contentImages } from "@lib/content-images";
+
+interface Props {
+  entry: {
+    data: {
+      canonicalPath: string;
+      pageType: string;
+      title: string;
+      description?: string;
+      heroImage?: string;
+      gallery?: string[];
+      booking?: {
+        enabled?: boolean;
+      };
+    };
+  };
+  Content: any;
+  rooms?: Array<any>;
+  offers?: Array<any>;
+}
+
+const { entry, Content, rooms = [], offers = [] } = Astro.props;
+const data = entry.data;
+const heroImages = contentImages([data.heroImage, ...(data.gallery ?? [])]);
+const heroImage = heroImages[0];
+const galleryImages = heroImages.slice(1);
+const showRooms = data.pageType === "rooms-index" || data.canonicalPath === "/";
+const showOffers = data.pageType === "offers-index" || data.canonicalPath === "/";
+---
+
+<main>
+  <section class="page-hero">
+    {heroImage && <img src={heroImage} alt={data.title} />}
+    <h1 class="sr-only">{data.title}</h1>
+    <BookingBar compact />
+  </section>
+
+  <section class="content-section">
+    <article class="content-body">
+      <Content />
+    </article>
+  </section>
+
+  {showRooms && <RelatedLinks title="Pokoje" items={rooms} />}
+  {showOffers && <RelatedLinks title="Pakiety" items={offers} />}
+
+  <MediaGallery images={galleryImages} title={data.title} />
+
+  {data.booking?.enabled && (
+    <section class="booking-section">
+      <iframe
+        title="Rezerwacja Hotel Zacisze"
+        src={bookingConfig.baseUrl}
+        loading="lazy"
+      ></iframe>
+    </section>
+  )}
+</main>

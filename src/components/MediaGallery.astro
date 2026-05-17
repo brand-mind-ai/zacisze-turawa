@@ -1,0 +1,22 @@
+---
+import { contentImages } from "@lib/content-images";
+
+interface Props {
+  images: string[];
+  title: string;
+  limit?: number;
+}
+
+const { images, title, limit = 12 } = Astro.props;
+const visibleImages = contentImages(images).slice(0, limit);
+---
+
+{visibleImages.length > 0 && (
+  <section class="media-gallery" aria-label={`Zdjęcia: ${title}`}>
+    {visibleImages.map((image, index) => (
+      <figure>
+        <img src={image} alt={`${title} ${index + 1}`} loading={index === 0 ? "eager" : "lazy"} />
+      </figure>
+    ))}
+  </section>
+)}
