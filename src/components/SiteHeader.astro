@@ -1,0 +1,21 @@
+---
+import { primaryNavigation, socialLinks } from "@lib/site-navigation";
+---
+
+<header class="site-header">
+  <a class="site-logo" href="/" aria-label="Hotel Zacisze Turawa">
+    <img src="/media/current-site/004-logo.svg" alt="Hotel Zacisze" width="210" height="38" />
+  </a>
+
+  <nav class="site-nav" aria-label="Główna nawigacja">
+    {primaryNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
+
+  <div class="site-actions" aria-label="Linki kontaktowe i społecznościowe">
+    {socialLinks.map((item) => (
+      <a href={item.href} aria-label={item.label}>
+        {item.shortLabel}
+      </a>
+    ))}
+  </div>
+</header>

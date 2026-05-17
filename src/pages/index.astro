@@ -1,50 +1,21 @@
 ---
+import { getCollection, render } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
+
+import ContentPage from "@components/ContentPage.astro";
+
+const pages = await getCollection("plPages");
+const rooms = await getCollection("plRooms");
+const offers = await getCollection("plOffers");
+const page = pages.find((entry) => entry.data.canonicalPath === "/");
+
+if (!page) {
+  throw new Error("Missing Polish homepage content.");
+}
+
+const { Content } = await render(page);
 ---
 
-<BaseLayout title="Zacisze Turawa Rebuild Scaffold">
-  <main>
-    <h1>Zacisze Turawa Rebuild Scaffold</h1>
-    <p>
-      Production content is intentionally empty until the verified crawl and
-      current-content preservation stage is complete.
-    </p>
-  </main>
+<BaseLayout title={page.data.seoTitle ?? page.data.title} description={page.data.description}>
+  <ContentPage page={page} Content={Content} rooms={rooms} offers={offers} />
 </BaseLayout>
-
-<style>
-  :global(body) {
-    margin: 0;
-    background: #f6f1ea;
-    color: #131210;
-    font-family:
-      "Host Grotesk",
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      sans-serif;
-  }
-
-  main {
-    min-height: 100svh;
-    display: grid;
-    place-content: center;
-    gap: 1rem;
-    padding: 2rem;
-    text-align: center;
-  }
-
-  h1 {
-    margin: 0;
-    font-family: "Libre Baskerville", Georgia, serif;
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 400;
-  }
-
-  p {
-    max-width: 42rem;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-</style>

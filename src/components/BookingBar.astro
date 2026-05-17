@@ -1,0 +1,25 @@
+---
+const today = new Date();
+const tomorrow = new Date(today);
+tomorrow.setDate(today.getDate() + 1);
+
+function formatDate(date: Date) {
+  return date.toISOString().slice(0, 10);
+}
+---
+
+<form class="booking-bar" action="/ceny_i_rezerwacja" method="get">
+  <label>
+    <span>Przyjazd</span>
+    <input type="date" name="arrivalDate" value={formatDate(today)} required />
+  </label>
+  <label>
+    <span>Wyjazd</span>
+    <input type="date" name="departureDate" value={formatDate(tomorrow)} required />
+  </label>
+  <label>
+    <span>Osoby</span>
+    <input type="number" name="personsCount" value="2" min="1" max="12" required />
+  </label>
+  <button type="submit">Rezerwuj</button>
+</form>

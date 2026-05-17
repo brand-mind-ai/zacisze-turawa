@@ -1,0 +1,16 @@
+---
+interface Props {
+  images: string[];
+  title: string;
+}
+
+const { images, title } = Astro.props;
+---
+
+{images.length > 0 && (
+  <section class="media-gallery" aria-label={`Zdjęcia: ${title}`}>
+    {images.map((image) => (
+      <img src={image} alt="" loading="lazy" decoding="async" />
+    ))}
+  </section>
+)}

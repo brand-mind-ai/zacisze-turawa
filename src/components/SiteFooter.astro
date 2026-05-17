@@ -1,0 +1,19 @@
+---
+import { primaryNavigation, socialLinks } from "@lib/site-navigation";
+---
+
+<footer class="site-footer">
+  <div>
+    <a class="footer-logo" href="/">Hotel Zacisze</a>
+    <p>ul. Biwakowa 2, 46-045 Turawa</p>
+    <p><a href="tel:+48774029030">77 402 90 30</a></p>
+  </div>
+
+  <nav aria-label="Nawigacja w stopce">
+    {primaryNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
+
+  <div class="footer-social" aria-label="Linki społecznościowe w stopce">
+    {socialLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+  </div>
+</footer>

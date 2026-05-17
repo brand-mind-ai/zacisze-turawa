@@ -1,0 +1,33 @@
+---
+interface RelatedItem {
+  id: string;
+  data: {
+    title: string;
+    canonicalPath: string;
+    heroImage?: string;
+  };
+}
+
+interface Props {
+  title: string;
+  items: RelatedItem[];
+}
+
+const { title, items } = Astro.props;
+---
+
+{items.length > 0 && (
+  <section class="related-section">
+    <div class="section-heading">
+      <h2>{title}</h2>
+    </div>
+    <div class="related-scroller">
+      {items.map((item) => (
+        <a class="related-card" href={item.data.canonicalPath}>
+          {item.data.heroImage && <img src={item.data.heroImage} alt="" loading="lazy" decoding="async" />}
+          <span>{item.data.title}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

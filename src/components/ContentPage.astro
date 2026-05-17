@@ -1,0 +1,71 @@
+---
+import BookingBar from "@components/BookingBar.astro";
+import MediaGallery from "@components/MediaGallery.astro";
+import RelatedLinks from "@components/RelatedLinks.astro";
+import SiteFooter from "@components/SiteFooter.astro";
+import SiteHeader from "@components/SiteHeader.astro";
+import { getRenderableImages } from "@lib/content-images";
+import bookingConfig from "@data/booking.json";
+
+interface ContentEntry {
+  id: string;
+  data: {
+    canonicalPath: string;
+    title: string;
+    description?: string;
+    heroImage?: string;
+    gallery?: string[];
+    pageType?: string;
+    booking?: {
+      enabled?: boolean;
+    };
+  };
+}
+
+interface Props {
+  page: ContentEntry;
+  Content: any;
+  rooms?: ContentEntry[];
+  offers?: ContentEntry[];
+}
+
+const { page, Content, rooms = [], offers = [] } = Astro.props;
+const gallery = getRenderableImages(page.data.gallery ?? []);
+const isBookingPage = Boolean(page.data.booking?.enabled);
+---
+
+<SiteHeader />
+
+<main>
+  <section class="page-hero" aria-label={page.data.title}>
+    {page.data.heroImage && <img src={page.data.heroImage} alt="" decoding="async" />}
+    <BookingBar />
+  </section>
+
+  <article class="content-section">
+    <p class="eyebrow">Hotel Zacisze Turawa</p>
+    <h1>{page.data.title}</h1>
+    {page.data.description && <p class="lead">{page.data.description}</p>}
+    <div class="markdown-body">
+      <Content />
+    </div>
+  </article>
+
+  {isBookingPage && (
+    <section class="booking-frame-section" aria-label="System rezerwacji">
+      <iframe
+        src={bookingConfig.baseUrl}
+        title="Rezerwacja Hotel Zacisze"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+      />
+    </section>
+  )}
+
+  {page.data.canonicalPath === "/" && <RelatedLinks title="Pokoje" items={rooms} />}
+  {page.data.canonicalPath === "/" && <RelatedLinks title="Pakiety" items={offers} />}
+
+  <MediaGallery images={gallery} title={page.data.title} />
+</main>
+
+<SiteFooter />
