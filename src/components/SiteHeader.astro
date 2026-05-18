@@ -1,10 +1,11 @@
 ---
+import UtilityIcon from "@components/UtilityIcon.astro";
 import { primaryNavigation, socialLinks } from "@lib/site-navigation";
 ---
 
 <header class="site-header">
   <a class="brand" href="/" aria-label="Hotel Zacisze">
-    <img src="/media/current-site/004-logo.svg" alt="Hotel Zacisze" width="210" height="38" />
+    <img src="/media/brand/zacisze-logo-ogg.svg" alt="Hotel Zacisze" width="210" height="66" />
   </a>
 
   <nav class="primary-nav" aria-label="Główna nawigacja">
@@ -13,8 +14,16 @@ import { primaryNavigation, socialLinks } from "@lib/site-navigation";
 
   <div class="header-actions" aria-label="Linki kontaktowe">
     {socialLinks.map((item) => (
-      <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
-        {item.label}
+      <a
+        class:list={["utility-link", `utility-link-${item.kind}`]}
+        href={item.href}
+        aria-label={item.label}
+        title={item.label}
+        target={item.href.startsWith("http") ? "_blank" : undefined}
+        rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+      >
+        <UtilityIcon kind={item.kind} />
+        {item.kind === "phone" && <span>{item.label}</span>}
       </a>
     ))}
     <a class="booking-link" href="/ceny_i_rezerwacja">Rezerwuj</a>

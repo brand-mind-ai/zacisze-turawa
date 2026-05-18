@@ -9,6 +9,7 @@
     "crawl:current": "node scripts/crawl-current-site.mjs",
     "preview": "astro preview",
     "check": "astro check",
+    "lint": "astro check",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

@@ -138,6 +138,7 @@ content:
     label: Site data
     type: file
     path: src/data/domains.json
+    format: json
     fields:
       - name: temporaryLaunchDomain
         label: Temporary launch domain
@@ -148,3 +149,59 @@ content:
       - name: seoPolicy
         label: SEO policy
         type: text
+
+  - name: site_content
+    label: Site content
+    type: file
+    path: src/data/site-content.json
+    format: json
+    fields:
+      - name: brandName
+        label: Brand name
+        type: string
+      - name: location
+        label: Location
+        type: string
+      - name: heroTitle
+        label: Hero title
+        type: string
+      - name: heroDeck
+        label: Hero deck
+        type: text
+      - name: heroFacts
+        label: Hero facts
+        type: object
+        list: true
+        fields:
+          - name: value
+            label: Value
+            type: string
+          - name: label
+            label: Label
+            type: string
+      - name: homeSections
+        label: Homepage sections
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: href
+            label: URL
+            type: string
+          - name: text
+            label: Text
+            type: text
+          - name: image
+            label: Image
+            type: image
+      - name: galleryTitle
+        label: Gallery title
+        type: string
+      - name: roomsTitle
+        label: Rooms title
+        type: string
+      - name: offersTitle
+        label: Offers title
+        type: string

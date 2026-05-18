@@ -78,3 +78,12 @@ git status --short --branch
 ```
 
 For visual changes, also run a browser check.
+
+Current V2 preview target:
+
+```text
+branch: codex/live-preview-scaffold
+preview URL: https://demo.zaciszeturawa.com/
+```
+
+Before saying the V2 preview is available on the public demo URL, verify mobile, tablet, and desktop layouts locally; push the latest branch; then confirm `https://demo.zaciszeturawa.com/` returns 200 and serves the expected V2 assets/content.

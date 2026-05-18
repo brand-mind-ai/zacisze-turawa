@@ -1,0 +1,49 @@
+{
+  "brandName": "Hotel Zacisze",
+  "location": "Turawa k. Opola",
+  "heroTitle": "Hotel Zacisze",
+  "heroDeck": "Rodzinny hotel w sosnowym lesie, 150 m od plaży Jeziora Turawskiego.",
+  "heroFacts": [
+    {
+      "value": "150 m",
+      "label": "od plaży"
+    },
+    {
+      "value": "75",
+      "label": "miejsc noclegowych"
+    },
+    {
+      "value": "SPA",
+      "label": "w cenie noclegu"
+    }
+  ],
+  "homeSections": [
+    {
+      "title": "Pokoje",
+      "href": "/pokoje",
+      "text": "Pokoje i apartamenty z ogrodami.",
+      "image": "/media/current-site/027-104.jpg"
+    },
+    {
+      "title": "Pakiety pobytowe",
+      "href": "/pakiety_pobytowe",
+      "text": "Pobyt nad Jeziorem Turawskim z restauracją i strefą SPA.",
+      "image": "/media/current-site/026-h1zacisze.jpg"
+    },
+    {
+      "title": "SPA",
+      "href": "/spa",
+      "text": "Jacuzzi, sauna i grota solna po aktywnym dniu.",
+      "image": "/media/current-site/071-118.jpg"
+    },
+    {
+      "title": "Restauracja",
+      "href": "/restauracja",
+      "text": "Kuchnia europejska z regionalnymi akcentami.",
+      "image": "/media/current-site/104-001.jpg"
+    }
+  ],
+  "galleryTitle": "Zacisze w kadrach",
+  "roomsTitle": "Pokoje",
+  "offersTitle": "Pakiety"
+}

@@ -22,6 +22,7 @@ const { title, items } = Astro.props;
   <section class="related-section">
     <div class="section-heading">
       <h2>{title}</h2>
+      <a href={title === "Pokoje" ? "/pokoje" : "/pakiety_pobytowe"}>Zobacz wszystkie</a>
     </div>
     <div class="related-scroller">
       {items.map((item) => {
@@ -29,7 +30,7 @@ const { title, items } = Astro.props;
         return (
           <a class="related-item" href={item.data.canonicalPath}>
             {image && <img src={image} alt={item.data.title} loading="lazy" />}
-            <span>{item.data.title}</span>
+            <span>{item.data.title.replace("Hotel Zacisze ★★★ Turawa – SPA, restauracja i konferencje nad Jeziorem Turawskim - ", "")}</span>
           </a>
         );
       })}

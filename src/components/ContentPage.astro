@@ -3,6 +3,7 @@ import BookingBar from "@components/BookingBar.astro";
 import MediaGallery from "@components/MediaGallery.astro";
 import RelatedLinks from "@components/RelatedLinks.astro";
 import bookingConfig from "@data/booking.json";
+import siteContent from "@data/site-content.json";
 import { contentImages } from "@lib/content-images";
 
 interface Props {
@@ -31,25 +32,70 @@ const heroImage = heroImages[0];
 const galleryImages = heroImages.slice(1);
 const showRooms = data.pageType === "rooms-index" || data.canonicalPath === "/";
 const showOffers = data.pageType === "offers-index" || data.canonicalPath === "/";
+const isHome = data.canonicalPath === "/";
+const titleParts = data.title.split(" - ");
+const displayTitle = isHome ? siteContent.heroTitle : titleParts[titleParts.length - 1] || data.title;
+const heroDeck = isHome ? siteContent.heroDeck : data.description;
+const sectionImages = contentImages(siteContent.homeSections.map((section) => section.image));
 ---
 
 <main>
-  <section class="page-hero">
+  <section class:list={["page-hero", { "page-hero-home": isHome }]}>
     {heroImage && <img src={heroImage} alt={data.title} />}
-    <h1 class="sr-only">{data.title}</h1>
-    <BookingBar compact />
+    <div class="hero-tint" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <h1>{displayTitle}</h1>
+      {heroDeck && <p>{heroDeck}</p>}
+      {isHome && (
+        <dl class="hero-facts" aria-label="Najważniejsze informacje">
+          {siteContent.heroFacts.map((fact) => (
+            <div>
+              <dt>{fact.value}</dt>
+              <dd>{fact.label}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </div>
+    <BookingBar />
   </section>
 
-  <section class="content-section">
-    <article class="content-body">
-      <Content />
-    </article>
-  </section>
+  {isHome && (
+    <section class="home-editorial" aria-label="Hotel Zacisze">
+      <div class="home-editorial-copy">
+        <Content />
+      </div>
+      <div class="home-editorial-media" aria-hidden="true">
+        <img src="/media/hotel-v2/lake-turawa.jpg" alt="" loading="lazy" />
+        <img src="/media/hotel-v2/garden-pool.jpg" alt="" loading="lazy" />
+      </div>
+    </section>
+  )}
 
-  {showRooms && <RelatedLinks title="Pokoje" items={rooms} />}
-  {showOffers && <RelatedLinks title="Pakiety" items={offers} />}
+  {!isHome && (
+    <section class="content-section">
+      <article class="content-body">
+        <Content />
+      </article>
+    </section>
+  )}
 
-  <MediaGallery images={galleryImages} title={data.title} />
+  {isHome && (
+    <section class="feature-section" aria-label="Główne sekcje">
+      {siteContent.homeSections.map((section, index) => (
+        <a class="feature-card" href={section.href}>
+          {sectionImages[index] && <img src={sectionImages[index]} alt="" loading="lazy" />}
+          <span>{section.title}</span>
+          <p>{section.text}</p>
+        </a>
+      ))}
+    </section>
+  )}
+
+  {showRooms && <RelatedLinks title={siteContent.roomsTitle} items={rooms} />}
+  {showOffers && <RelatedLinks title={siteContent.offersTitle} items={offers} />}
+
+  <MediaGallery images={galleryImages} title={isHome ? siteContent.galleryTitle : data.title} />
 
   {data.booking?.enabled && (
     <section class="booking-section">

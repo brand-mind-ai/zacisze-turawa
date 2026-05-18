@@ -10,7 +10,7 @@ const { compact = false } = Astro.props;
 
 <form class:list={["booking-bar", { compact }]} action={bookingConfig.baseUrl} method="get">
   <label class="booking-date">
-    <input name="arrivalDate" type="date" />
+    <input name="arrivalDate" type="date" required />
     <span class="booking-date-text">
       <span class="booking-date-label">Przyjazd</span>
       <span class="booking-date-placeholder">Data</span>
@@ -18,12 +18,20 @@ const { compact = false } = Astro.props;
   </label>
   <span class="booking-separator" aria-hidden="true"></span>
   <label class="booking-date">
-    <input name="departureDate" type="date" />
+    <input name="departureDate" type="date" required />
     <span class="booking-date-text">
       <span class="booking-date-label">Wyjazd</span>
       <span class="booking-date-placeholder">Data</span>
     </span>
   </label>
-  <input name="personsCount" type="hidden" value="2" />
+  <label class="booking-guests">
+    <span>Goście</span>
+    <select name="personsCount" aria-label="Liczba gości">
+      <option value="1">1</option>
+      <option value="2" selected>2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+  </label>
   <button type="submit">Rezerwuj</button>
 </form>

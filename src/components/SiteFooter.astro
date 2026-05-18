@@ -1,4 +1,5 @@
 ---
+import UtilityIcon from "@components/UtilityIcon.astro";
 import { primaryNavigation, socialLinks } from "@lib/site-navigation";
 ---
 
@@ -15,6 +16,7 @@ import { primaryNavigation, socialLinks } from "@lib/site-navigation";
   <div class="footer-contact">
     {socialLinks.map((item) => (
       <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
+        <UtilityIcon kind={item.kind} />
         {item.label}
       </a>
     ))}
